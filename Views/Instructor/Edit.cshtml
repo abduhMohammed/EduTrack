@@ -1,0 +1,78 @@
+﻿@model InstDeptCourseViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Insturctor</h2>
+@* method="post" action="/Instructor/SaveEdit/@Model.id" *@
+<form asp-method="post" asp-controller="Instructor" asp-action="SaveEdit" asp-route-id="@Model.id">
+    <div>
+        @*01 Pure HTML *@
+        @* <label>Name</label>
+        <input name="Name" id="Name" value="@Model?.Name" type="text" class="form form-control" /> *@
+
+        @*02 Pure C# *@
+
+        @*001 Lossly Type Helper *@
+        @* <label>Name</label>
+        @Html.TextBox("Name") *@
+
+        @*002 Strong Type Helper without Editor *@
+        @* <label>Name</label>
+        @Html.TextBoxFor(e => e.Name, new {style = "color: red", @class = "form from-control"}) *@
+
+        @*003 Strong Type Helper with Editor *@
+        @* @Html.LabelFor(e => e.Name)
+        @Html.EditorFor(e => e.Name, new {@class = "form form-control"}) *@
+
+        @*03 Mix HTML && C# *@
+        <label asp-for="Name"></label>
+        <input class="form form-control" asp-for="Name"/>
+    </div>
+    <div>
+        <label asp-for="Image"></label>
+        <input aasp-for="Image" class="form form-control" />
+    </div>
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form form-control" />
+    </div>
+    <div>
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" class="form form-control" />
+    </div>
+    <div>
+        <label>DeptartmentID</label>
+        @* <input name="DeptartmentID" id="DeptartmentID" value="@Model?.DeptartmentID" type="text" class="form form-control" /> *@
+        <select asp-for="DeptartmentID" class="form form-control">
+            @foreach(var deptItem in Model.DeptList)
+            {
+                if(Model.DeptartmentID == deptItem.id)
+                {
+                    <option value="@deptItem.id" selected>@deptItem.Name</option>
+                }else
+                {
+                    <option value="@deptItem.id">@deptItem.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <div>
+        <label>CourseID</label>
+        @* <input name="CourseID" id="CourseID" value="@Model?.CourseID" type="text" class="form form-control" /> *@
+        <select asp-for="CourseID" class="form form-control">
+            @foreach(var courseList in Model.CourseList)
+            {
+                if(Model.CourseID == courseList.id)
+                {
+                    <option selected value="@courseList.id">@courseList.Name</option>
+                }else
+                {
+                    <option value="@courseList.id">@courseList.Name</option>    
+                }
+            }
+        </select>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-primary" value="Submit" />
+</form>

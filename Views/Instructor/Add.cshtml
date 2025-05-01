@@ -1,0 +1,70 @@
+﻿@model Instructor
+
+@{
+    ViewData["Title"] = "Add";
+    // SelectList deptOptions = new SelectList(ViewBag.DeptList, "Id", "Name");
+    // SelectList courseOptions = new SelectList(ViewBag.CourseList, "Id", "Name");
+}
+
+<h1>Add New Insturctor</h1>
+
+<form method="post" asp-action="SaveAdd" asp-controller="Instructor">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" class="form form-control" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="DeptartmentID"></label>
+        <select asp-for="DeptartmentID" class="form form-control">
+            <option value="0"> -- Select Department --</option>
+            @foreach (var item in ViewBag.DeptList)
+            {
+                <option value="@item.id">@item.Name</option>
+            }
+        </select>
+        <span asp-validation-for="DeptartmentID" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="CourseID"></label>
+            <select asp-for="CourseID" class="form form-control">
+                <option value="0"> -- Select Course --</option>
+            @foreach (var item in ViewBag.CourseList)
+                {
+                    <option value="@item.id">@item.Name</option>
+                }
+            </select>
+        <span asp-validation-for="CourseID" class="text-danger"></span>
+    </div>
+    <br />
+    <input type="submit" class="btn btn-primary" value="Create" />
+</form>
+<br />
+
+@* <a href="/Instructor/Index" class="btn btn-success">Back To List</a> *@
+@* @Html.ActionLink("Back to List", "Index", "Instructor") *@
+<a asp-action="Index" asp-controller="Instructor" class="btn btn-success">Back To List</a>
+
+@* <a href="/Instructor/Edit/1" class="btn btn-success">Details</a> *@
+@* @Html.ActionLink("--Details--", "Details", "Instructor", new {Id = Model.id}) *@
+@* <a asp-action="Details" asp-controller="Instructor" asp-route-id="@Model.id">Details</a> *@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

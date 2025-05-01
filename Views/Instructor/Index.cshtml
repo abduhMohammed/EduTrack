@@ -1,0 +1,39 @@
+﻿@model List<Instructor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a href="/Instructor/Add" class="btn btn-success"> New </a>
+<br />
+<table class="table table_border table-hover">
+    <thead>
+        <tr>
+            <th>Instructor Name</th>
+            <th>Salary</th>
+            <th>Address</th>
+            <th>Department Name</th>
+            <th>Course Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Salary</td>
+                <td>@item.Address</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Course.Name</td>
+                <td><a href="/Instructor/Edit/@item.id" class="btn btn-success">Edit</a></td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-controller="Instructor" asp-all-route-id="@item.id">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
